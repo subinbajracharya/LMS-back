@@ -1,0 +1,25 @@
+@rootURL = http://localhost:3000
+@apiEP = {{rootURL}}/api/v1
+@authEP = {{apiEP}}/auth
+
+
+###
+POST {{authEP}}/register
+Content-Type: application/json
+
+{
+    "fName": "subin",
+    "lName": "bajra",
+    "phone": "34567",
+    "email": "test@gmail.com",
+    "password": "1234"
+}
+
+###
+POST {{authEP}}/login
+Content-Type: application/json
+
+{
+  "email": "subin@gmail.com",
+  "password": "1234"
+}

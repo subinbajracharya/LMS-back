@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 export const config = {
     port: process.env.PORT || 3001,
     mongoOptions: {
@@ -6,5 +9,6 @@ export const config = {
     jwt: {
         secret: process.env.JWT_SECRET || "secret",
         expiresIn: process.env.JWT_EXPIRESIN || "2d"
-    }
+    },
+    salt: process.env.SALT || 15,
 }
