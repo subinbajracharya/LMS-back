@@ -35,7 +35,7 @@ export const sendEmailVerificationTemplate = async ({ to, url, userName }) => {
         <p>Thank you for registering with us!</p>
         <br />
         <p>Warm Regards,</p>
-        <p>Financial Tracker</p>
+        <p>LMS</p>
         `,
     }
 

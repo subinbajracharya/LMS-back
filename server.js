@@ -26,6 +26,7 @@ mongoConnection()
     .then(() => {
         app.listen(PORT, (err) => {
             if (err) {
+                console.log(err)
                 console.log("SERVER COULD NOT STARTED");
             } else {
                 console.log("SERVER STARTED AT PORT: ", PORT);

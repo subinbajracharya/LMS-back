@@ -61,12 +61,12 @@ export const loginUser = async (req, res) => {
 
         // fetch user from database
         let user = await getUser({ email: email });
-        if (!user.status && !user.isEmailVerified) {
-            return res.status(401).json({
-                status: false,
-                message: "Please verify your email first!"
-            })
-        }
+        // if (!user.status && !user.isEmailVerified) {
+        //     return res.status(401).json({
+        //         status: false,
+        //         message: "Please verify your email first!"
+        //     })
+        // }
 
         if (user) {
             // user found
@@ -93,7 +93,7 @@ export const loginUser = async (req, res) => {
             } else {
                 return res.status(401).json({
                     status: false,
-                    message: "User not authenticated!",
+                    message: "Invalid Login Credentials!",
                 });
             }
         } else {
@@ -120,29 +120,29 @@ export const verifyEmail = async (req, res) => {
         let user = await getUser({ email: email })
 
         if (user) {
-            if (user.isEmailVerified) {
-                return res.json({
-                    status: false,
-                    message: "Email already verified!"
-                })
-            }
+            //     if (user.isEmailVerified) {
+            //         return res.json({
+            //             status: false,
+            //             message: "Email already verified!"
+            //         })
+            //     }
 
-            if (user.emailVerificationToken === token) {
-                user.isEmailVerified = true
-                user.emailVerificationToken = "null"
-                await user.save()
+            //     if (user.emailVerificationToken === token) {
+            //         user.isEmailVerified = true
+            //         user.emailVerificationToken = "null"
+            //         await user.save()
 
-                return res.json({
-                    status: true,
-                    message: "Email Verified!"
-                })
-            } else {
-                return res.json({
-                    status: false,
-                    message: "Invalid token!"
-                })
-            }
-        } else {
+            //         return res.json({
+            //             status: true,
+            //             message: "Email Verified!"
+            //         })
+            //     } else {
+            //         return res.json({
+            //             status: false,
+            //             message: "Invalid token!"
+            //         })
+            //     }
+            // } else {
             return res.json({
                 status: false,
                 message: "User not found!"
