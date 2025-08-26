@@ -8,7 +8,9 @@ export const config = {
     },
     jwt: {
         secret: process.env.JWT_SECRET || "secret",
-        expiresIn: process.env.JWT_EXPIRESIN || "2d"
+        expiresIn: process.env.JWT_EXPIRESIN || "2d",
+        refresh_secret: process.env.JWT_REFRESH_SECRET || "REFRESH-SECRET_KEY",
+        refresh_expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "30d",
     },
-    salt: process.env.SALT || 15,
+    salt: parseInt(process.env.SALT) || 10,
 }

@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoConnection from "./src/config/mongoConfig.js";
 import { config } from "./src/config/config.js";
 import authRouter from "./src/routes/authRouter.js"
+import userRouter from "./src/routes/userRouter.js";
+import bookRouter from "./src/routes/bookRouter.js";
 
 const app = express();
 
@@ -19,7 +21,14 @@ app.get("/", (req, res) => {
     })
 })
 
+// Auth routes
 app.use("/api/v1/auth", authRouter)
+
+// User routes
+app.use("/api/v1/user", userRouter)
+
+// Book routes
+app.use("/api/v1/books", bookRouter)
 
 // mongo connection
 mongoConnection()

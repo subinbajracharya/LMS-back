@@ -1,25 +1,43 @@
 @rootURL = http://localhost:3000
-@apiEP = {{rootURL}}/api/v1
-@authEP = {{apiEP}}/auth
-
+@apiUrl = {{rootURL}}/api/v1
 
 ###
-POST {{authEP}}/register
+POST {{apiUrl}}/auth/register
 Content-Type: application/json
 
 {
-    "fName": "subin",
-    "lName": "bajra",
-    "phone": "34567",
-    "email": "test@gmail.com",
-    "password": "1234"
+    "fName": "max",
+    "lName": "maxi",
+    "phone": "768553",
+    "email": "max@gmail.com",
+    "password": "1234",
+    "role": "admin"
 }
 
 ###
-POST {{authEP}}/login
+POST {{apiUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@gmail.com",
+  "email": "max@gmail.com",
   "password": "1234"
+}
+
+### Get books publicly
+GET {{apiUrl}}/books
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1heEBnbWFpbC5jb20iLCJpYXQiOjE3NTYxNjk5NDMsImV4cCI6MTc1NjI1NjM0M30.9ZBDwnTgWQddzsKyoM7lrfIX9u7hUh2nPg7vB359es0
+
+### create book
+POST {{apiUrl}}/books
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1heEBnbWFpbC5jb20iLCJpYXQiOjE3NTYxNjk5NDMsImV4cCI6MTc1NjI1NjM0M30.9ZBDwnTgWQddzsKyoM7lrfIX9u7hUh2nPg7vB359es0
+Content-Type: application/json
+
+{
+  "title" : "book1",
+  "author" : "book author",
+  "thumbnail" : "https://wallpapercave.com/wp/rdYAno5.jpg",
+  "isbn" : "123982223",
+  "genre": "horror",
+  "publishedYear" : 2020,
+  "description" : "optional"
 }

@@ -27,7 +27,7 @@ export const createUser = (userObj) => {
 };
 
 // Update user
-export const updateUser = (id, updateObj) => {
+export const updateUserById = (id, updateObj) => {
     return User.findByIdAndUpdate(id, updateObj);
 };
 

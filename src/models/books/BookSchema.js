@@ -1,56 +1,58 @@
-import mongose from "mongoose";
+import mongoose from "mongoose";
 
-const bookSchema = new mongose.Schema({
-    title: {
-        type: String,
-        required: true,
+const bookSchema = new mongoose.Schema(
+    {
+        status: {
+            type: String,
+            enum: ["active", "inactive"],
+            default: "inactive",
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+        genre: {
+            type: String,
+            required: true,
+        },
+        author: {
+            type: String,
+            required: true,
+        },
+        isbn: {
+            type: String,
+            unique: true,
+            index: 1,
+            required: true,
+        },
+        publishedYear: {
+            type: Number,
+            required: true,
+        },
+        thumbnail: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            default: "",
+        },
+        isAvailable: {
+            type: Boolean,
+            default: true,
+        },
+        expectedAvailable: {
+            type: Date,
+            default: null,
+        },
+        averageRating: {
+            type: Number,
+            default: 0,
+        },
     },
-    author: {
-        type: String,
-        required: true,
-    },
-    isbn: {
-        type: String,
-        unique: true,
-        required: true,
-    },
-    published_date: {
-        type: Date,
-        required: true,
-    },
-    genre: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: false,
-    },
-    date: {
-        type: Date,
-        default: Date.now,
-    },
-    borrowed_in: {
-        type: Date,
-        required: false,
-    },
-    returned_on: {
-        type: Date,
-        required: false,
-    },
-    status: {
-        type: String,
-        enum: ["available", "borrowed", "reserved"],
-        default: "available",
-    },
-    created_at: {
-        type: Date,
-        default: Date.now,
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now,
-    },
-});
+    {
+        timestamps: true,
+    }
+);
 
-const Book = mongose.model("Book", bookSchema);
+export default mongoose.model("Book", bookSchema);

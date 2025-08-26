@@ -24,7 +24,8 @@ const userSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            default: "Student",
+            enum: ["admin", "student"],
+            default: "student",
         },
         refreshJWT: {
             type: String,
@@ -36,7 +37,17 @@ const userSchema = new mongoose.Schema(
         emailVerificationToken: {
             type: String,
             default: "",
-        }
+        },
+        accessToken: [
+            {
+                type: String,
+                default: [],
+            },
+        ],
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
     }
 )
 
