@@ -1,11 +1,11 @@
-import { getAllBooks, insertBook } from "../models/books/BookModel.js";
+import { getAllBooks, insertBook, updateBookById } from "../models/books/BookModel.js";
 
 export const fetchBooks = async (req, res) => {
     // Logic to fetch books
     try {
         // Simulating fetching books from a database
-        let books = await getAllBooks({ status: "available" });
-        res.status(200).json({
+        let books = await getAllBooks({ status: "active" });
+        return res.status(200).json({
             status: "success",
             message: books.length + "Books fetched successfully",
             books,
@@ -57,6 +57,26 @@ export const createBook = async (req, res) => {
         return res.status(500).json({
             status: "error",
             message: "Failed to create book",
+            error: error.message,
+        });
+    }
+}
+
+export const updateBook = async (req, res) => {
+    try {
+        let id = req.params.id;
+
+        let book = await updateBookById(id, req.body);
+        return res.status(200).json({
+            status: "success",
+            message: "Book updated successfully",
+            book
+        });
+    } catch (error) {
+        let message = error.code === 11000 ? "Book with this ISBN already exists" : "Failed to update book";
+        return res.status(500).json({
+            status: "error",
+            message,
             error: error.message,
         });
     }

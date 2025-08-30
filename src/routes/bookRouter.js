@@ -1,6 +1,8 @@
 import express from "express"
-import { createBook, fetchAllBooks, fetchBooks } from "../controllers/bookController.js"
+import { createBook, fetchAllBooks, fetchBooks, updateBook } from "../controllers/bookController.js"
 import { auth, isAdmin } from "../middleware/authMiddleware.js"
+import { createBookValidation } from "../middleware/joiMiddleware.js"
+import { upload } from "../middleware/multerConfig.js"
 
 const router = express.Router()
 
@@ -8,6 +10,8 @@ router.get("/pub-books", fetchBooks)
 
 router.get("/", auth, isAdmin, fetchAllBooks)
 
-router.post("/", auth, isAdmin, createBook)
+router.post("/", upload.single("image"), createBookValidation, auth, isAdmin, createBook)
+
+router.put("/:id", auth, isAdmin, updateBook)
 
 export default router

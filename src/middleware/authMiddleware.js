@@ -1,5 +1,5 @@
 import { getUser } from "../models/users/userModel.js";
-import { decodeAccessToken } from "../utils/jwt.js";
+import { decodeAccessToken, decodeRefreshToken } from "../utils/jwt.js";
 
 export const auth = async (req, res, next) => {
     // if authenticated go to next
@@ -32,6 +32,35 @@ export const auth = async (req, res, next) => {
             : "Server Error";
 
         let statusCode = err?.message?.includes("jwt expired") ? 401 : 500;
+        return res
+            .status(statusCode)
+            .json({ message: errorMessage, status: "error" });
+    }
+};
+
+export const refreshMiddleware = async (req, res, next) => {
+    try {
+        const refreshToken = req.headers.authorization;
+
+        let decoded = decodeRefreshToken(refreshToken);
+
+        let user = await getUser({ email: decoded.email });
+
+        console.log(1111, user, refreshToken);
+        if (user && user.refreshToken == refreshToken) {
+            user.password = "";
+            req.user = user;
+            next();
+        } else {
+            res.status(401).json({ message: "Unauthorized" });
+        }
+    } catch (err) {
+        console.log(err.message);
+        let errorMessage = err.message.includes("jwt expire")
+            ? err.message
+            : "Server Error";
+
+        let statusCode = err.message.includes("jwt expire") ? 401 : 500;
         return res
             .status(statusCode)
             .json({ message: errorMessage, status: "error" });

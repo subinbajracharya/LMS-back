@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
             enum: ["admin", "student"],
             default: "student",
         },
-        refreshJWT: {
+        refreshToken: {
             type: String,
         },
         isEmailVerified: {
@@ -51,4 +51,4 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-export default userSchema
+export default mongoose.model("User", userSchema);

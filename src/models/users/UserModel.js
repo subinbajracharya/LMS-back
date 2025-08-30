@@ -1,10 +1,7 @@
-import userSchema from "./userSchema.js";
-import mongoose from "mongoose";
-
-const User = mongoose.model("User", userSchema);
+import User from "./UserSchema.js";
 
 // Get list of users
-export const getUsers = () => {
+export const getAllUsers = () => {
     // list of users
     return User.find();
 };

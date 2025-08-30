@@ -1,6 +1,8 @@
 import express from "express"
 import { loginUser, registerUser, verifyEmail } from "../controllers/authController.js"
 import { createAccessToken } from "../utils/jwt.js"
+import { refreshMiddleware } from "../middleware/authMiddleware.js"
+import { loginValidation } from "../middleware/joiMiddleware.js"
 
 const router = express.Router()
 
@@ -8,12 +10,12 @@ const router = express.Router()
 router.post("/register", registerUser)
 
 // Login api
-router.post("/login", loginUser)
+router.post("/login", loginValidation, loginUser)
 
 // Verify email api
 router.post("/verify-email", verifyEmail)
 
-router.get("/refresh-token", (req, res) => {
+router.get("/refresh-token", refreshMiddleware, (req, res) => {
     let payload = {
         email: req.user.email,
     };
