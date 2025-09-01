@@ -16,7 +16,7 @@ export const updateBookById = (id, bookData) => {
     return Book.findByIdAndUpdate(id, bookData, { new: true });
 }
 
-export const deleteBook = (_id) => {
+export const deleteBookById = (_id) => {
     return Book.findByIdAndDelete(_id);
 }
 

@@ -5,6 +5,7 @@ import { config } from "./src/config/config.js";
 import authRouter from "./src/routes/authRouter.js"
 import userRouter from "./src/routes/userRouter.js";
 import bookRouter from "./src/routes/bookRouter.js";
+import borrowRouter from "./src/routes/borrowRouter.js";
 
 const app = express();
 
@@ -21,6 +22,9 @@ app.get("/", (req, res) => {
     })
 })
 
+// static serve
+app.use("/public", express.static("assets"));
+
 // Auth routes
 app.use("/api/v1/auth", authRouter)
 
@@ -29,6 +33,9 @@ app.use("/api/v1/user", userRouter)
 
 // Book routes
 app.use("/api/v1/books", bookRouter)
+
+// Borrow routes
+app.use("/api/v1/borrow", borrowRouter);
 
 // mongo connection
 mongoConnection()

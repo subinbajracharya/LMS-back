@@ -26,7 +26,7 @@ export const createBookValidation = (req, res, next) => {
         isbn: joi.string().required(),
         publishedYear: joi.date().required(),
         genre: joi.string().required(),
-        thumbnail: joi.string().uri().required(),
+        // thumbnail: joi.string().uri().required(),
         description: joi.string().optional(),
     });
     joiMiddleware(createBookSchema, req, res, next);
