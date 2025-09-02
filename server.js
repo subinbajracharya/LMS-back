@@ -9,7 +9,10 @@ import borrowRouter from "./src/routes/borrowRouter.js";
 
 const app = express();
 
-app.use(cors())
+app.use(cors({
+    credentials: true
+}))
+// app.use(cookieParser());
 app.use(express.json())
 
 const PORT = config.port

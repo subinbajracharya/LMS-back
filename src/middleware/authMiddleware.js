@@ -46,7 +46,6 @@ export const refreshMiddleware = async (req, res, next) => {
 
         let user = await getUser({ email: decoded.email });
 
-        console.log(1111, user, refreshToken);
         if (user && user.refreshToken == refreshToken) {
             user.password = "";
             req.user = user;

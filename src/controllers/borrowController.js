@@ -4,7 +4,7 @@ import { getAllBorrows, getBorrowById, insertBorrow } from "../models/borrow/Bor
 export const createBorrowRecord = async (req, res, next) => {
     try {
         const userId = req.user._id;
-        const { bookId, bookTitle, thumbnail } = req.body;
+        const { bookId, title, thumbnail } = req.body;
 
         const borrowDate = new Date();
         const dueDate = new Date(borrowDate);
@@ -12,14 +12,14 @@ export const createBorrowRecord = async (req, res, next) => {
 
         const bookData = await updateBookById(bookId, { isAvailable: false, expectedAvailable: dueDate });
 
-        const newBorrow = new Borrow({
+        const newBorrow = {
             userId,
             bookId,
-            bookTitle,
+            bookTitle: title,
             thumbnail,
             borrowDate,
             dueDate,
-        });
+        };
 
         let book = await insertBorrow(newBorrow);
         res.status(201).json({
@@ -28,6 +28,7 @@ export const createBorrowRecord = async (req, res, next) => {
             borrow: book,
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             status: "error",
             message: "Borrowing failed",

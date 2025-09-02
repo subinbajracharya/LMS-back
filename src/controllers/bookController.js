@@ -71,6 +71,7 @@ export const createBook = async (req, res) => {
 export const updateBook = async (req, res) => {
     try {
         let id = req.params.id;
+        console.log(id)
 
         let book = await updateBookById(id, req.body);
         return res.status(200).json({

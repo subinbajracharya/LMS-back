@@ -87,6 +87,7 @@ export const loginUser = async (req, res) => {
                     message: "Login Successful",
                     user,
                     accessToken,
+                    refreshToken,
                 });
             } else {
                 return res.status(401).json({
