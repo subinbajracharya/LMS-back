@@ -8,6 +8,11 @@ export const auth = async (req, res, next) => {
         let accessToken = req?.headers?.authorization?.includes("Bearer")
             ? req?.headers?.authorization.split(" ")[1]
             : req?.headers?.authorization;
+        console.log("here upto", accessToken)
+        if (accessToken == null) {
+            console.log('axa')
+            return res.status(401).json({ message: "Token Not Found", status: "error" });
+        }
 
         let decoded = decodeAccessToken(accessToken);
         console.log(decoded)
@@ -26,7 +31,7 @@ export const auth = async (req, res, next) => {
             });
         }
     } catch (err) {
-        console.log(err.message);
+        console.error(err);
         let errorMessage = err?.message?.includes("jwt expired")
             ? err.message
             : "Server Error";

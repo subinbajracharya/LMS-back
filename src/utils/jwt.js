@@ -8,6 +8,7 @@ export const createAccessToken = (payload) => {
 };
 
 export const decodeAccessToken = (token) => {
+    console.log('token ayo', token)
     return jwt.verify(token, config.jwt.secret);
 };
 
