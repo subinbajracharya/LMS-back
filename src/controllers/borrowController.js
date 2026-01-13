@@ -1,5 +1,5 @@
-import { updateBookById } from "../models/books/BookModel.js";
-import { getAllBorrows, getBorrowById, insertBorrow } from "../models/borrow/BorrowModel.js";
+import { updateBookById } from "../models/books/bookModel.js";
+import { getAllBorrows, getBorrowById, insertBorrow } from "../models/borrow/borrowModel.js";
 
 export const createBorrowRecord = async (req, res, next) => {
     try {

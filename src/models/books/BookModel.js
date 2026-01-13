@@ -1,4 +1,4 @@
-import Book from "./BookSchema.js";
+import Book from "./bookSchema.js";
 
 export const insertBook = (bookData) => {
     return Book(bookData).save();

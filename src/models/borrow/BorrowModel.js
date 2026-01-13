@@ -1,4 +1,4 @@
-import Borrow from "./BorrowSchema.js";
+import Borrow from "./borrowSchema.js";
 
 export const getAllBorrows = (filter) => {
     return Borrow.find(filter)

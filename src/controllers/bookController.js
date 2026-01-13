@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { deleteBookById, getAllBooks, insertBook, updateBookById } from "../models/books/BookModel.js";
+import { deleteBookById, getAllBooks, insertBook, updateBookById } from "../models/books/bookModel.js";
 
 export const fetchBooks = async (req, res) => {
     // Logic to fetch books
